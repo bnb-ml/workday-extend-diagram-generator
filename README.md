@@ -17,20 +17,78 @@ This tool is specifically designed to understand the relationship semantics of W
 
 ## Prerequisites
 
-To run this tool natively on any OS (Windows, Linux, macOS), ensure you have the following installed:
+This tool is a Python-based wrapper that orchestrates Java (for the PlantUML engine) and Graphviz (for layout calculation). To ensure a smooth experience, please verify that your environment meets the following requirements:
 
-- **Python 3.7+**
-- **Java Runtime Environment (JRE)**: Required to execute the PlantUML `.jar` artifact.
+| Dependency  | Purpose                | Link                                            |
+| :---------- | :--------------------- | :---------------------------------------------- |
+| Python 3.7+ | Core tool logic        | [python.org](https://www.python.org/downloads/) |
+| Java (JRE)  | Executes PlantUML      | [java.com](https://www.java.com/en/download/)   |
+| Graphviz    | Renders diagram layout | [graphviz.org](https://graphviz.org/download/)  |
+
+<details>
+<summary>Prerequisites Install Guide</summary>
+
+### Prerequisites Install Guide
+
+Depending on your Operating System, you can install all dependencies at once using these commands:
+
+#### 🍎 macOS (Homebrew)
+
+```bash
+brew install python openjdk graphviz pipx
+pipx ensurepath
+# Note: You may need to symlink openjdk for the system to find it:
+sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+```
+
+#### 🐧 Ubuntu / Debian / WSL
+
+```bash
+sudo apt update
+sudo apt install -y python3 python3-pip default-jre graphviz pipx
+pipx ensurepath
+```
+
+#### 🪟 Windows (winget)
+
+```powershell
+winget install Python.Python.3.12 OpenJDK.OpenJDK.21 Graphviz.Graphviz pipx
+pipx ensurepath
+```
+
+---
+
+### Verify Your Environment
+
+Before installing the generator, you can run this single command to ensure all system dependencies are correctly mapped in your `PATH`:
+
+```bash
+python3 --version && java -version && dot -V
+```
+
+If all three commands return a version number, you are ready to proceed to the **Installation** section!
+
+</details>
 
 ## Installation
 
-Install the tool globally directly from GitHub using `pip` (or `pipx` for an isolated environment):
+### Option 1: Using pipx (Recommended)
+
+To avoid conflicts with system Python packages and bypass "externally-managed-environment" errors, use [pipx](https://pypa.github.io/pipx/).
 
 ```bash
-pip install git+https://github.com/bnb-ml/workday-extend-diagram-generator.git
+pipx install git+[https://github.com/bnb-ml/workday-extend-diagram-generator.git](https://github.com/bnb-ml/workday-extend-diagram-generator.git)
 ```
 
-This will automatically install dependencies like `Pillow` and make the `workday-diagram` command globally available on your system.
+### Option 2: Using a Virtual Environment
+
+If you prefer standard pip, always use a virtual environment:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install git+[https://github.com/bnb-ml/workday-extend-diagram-generator.git](https://github.com/bnb-ml/workday-extend-diagram-generator.git)
+```
 
 ## Obtaining the Source Files
 
@@ -103,3 +161,17 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 ## License
 
 This project is open-source and available under the MIT License.
+
+## Troubleshooting
+
+### "Externally Managed Environment" Error
+
+If you see an error regarding `PEP 668`, it means your OS is protecting its system Python. Use **Option 1 (pipx)** in the installation section to resolve this.
+
+### "Command 'java' not found"
+
+The tool uses PlantUML, which is a Java application. Ensure you can run `java -version` in your terminal. If not, install the JRE (see Prerequisites).
+
+### Diagrams looking "broken" or missing lines
+
+This usually happens if **Graphviz** is missing. Ensure the `dot` command is available in your PATH by installing Graphviz.
