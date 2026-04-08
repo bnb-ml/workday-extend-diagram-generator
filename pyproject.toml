@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "workday-extend-diagram-generator"
+version = "0.1.0"
+description = "Generate ER Diagram via PlantUML from a JSON or ZIP descriptor"
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = [
+    "Pillow>=9.0.0"
+]
+
+[project.scripts]
+workday-diagram = "diagram_generator:main"
+
+[tool.setuptools]
+py-modules = ["diagram_generator"]
