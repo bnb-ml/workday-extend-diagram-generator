@@ -77,7 +77,7 @@ If all three commands return a version number, you are ready to proceed to the *
 To avoid conflicts with system Python packages and bypass "externally-managed-environment" errors, use [pipx](https://pypa.github.io/pipx/).
 
 ```bash
-pipx install git+[https://github.com/bnb-ml/workday-extend-diagram-generator.git](https://github.com/bnb-ml/workday-extend-diagram-generator.git)
+pipx install git+https://github.com/bnb-ml/workday-extend-diagram-generator.git
 ```
 
 ### Option 2: Using a Virtual Environment
@@ -87,7 +87,7 @@ If you prefer standard pip, always use a virtual environment:
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-pip install git+[https://github.com/bnb-ml/workday-extend-diagram-generator.git](https://github.com/bnb-ml/workday-extend-diagram-generator.git)
+pip install git+https://github.com/bnb-ml/workday-extend-diagram-generator.git
 ```
 
 ## Obtaining the Source Files
